@@ -1,0 +1,34 @@
+//First File:
+public class ArrayAverageTester extends ConsoleProgram
+{
+    public void run()
+    {
+        int[] numArray = {12, 17, 65, 7, 30, 88};
+        
+        // Create an ArrayAverage object
+        ArrayAverage arrayAverage = new ArrayAverage(numArray);
+        
+        // Print the result
+        System.out.println("The average of the array is " + arrayAverage.getAverage());
+    }
+}
+
+Second File:
+public class ArrayAverage
+{
+   private int[] values;
+
+   public ArrayAverage(int[] theValues)
+   {
+      values = theValues;
+   }
+
+   public double getAverage()
+   {
+     int sum = 0;
+     for (int value : values) {
+         sum += value; // Add each value to the sum
+     }
+     return (double) sum / values.length; // Calculate and return the average
+   }
+}
