@@ -1,0 +1,10 @@
+public class Odd extends ConsoleProgram {
+    public void run() {
+        // Using a while loop instead of a for loop
+        int x = 1;
+        while (x <= 10) {
+            System.out.println(x);
+            x += 2;
+        }
+    }
+}
