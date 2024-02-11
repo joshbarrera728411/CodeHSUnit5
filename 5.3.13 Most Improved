@@ -1,0 +1,166 @@
+//First File
+public class Student {
+    private static final int NUM_EXAMS = 4;
+
+    private String firstName;
+    private String lastName;
+    private int gradeLevel;
+    private double gpa;
+
+    private int[] exams; 
+    private int numExamsTaken; 
+
+    public Student(String fName, String lName, int grade) {
+        firstName = fName;
+        lastName = lName;
+        gradeLevel = grade;
+        exams = new int[NUM_EXAMS];
+        numExamsTaken = 0;
+    }
+
+    public int getExamRange() {
+        if (numExamsTaken == 0) {
+            return 0;
+        }
+
+        int minScore = exams[0];
+        int maxScore = exams[0];
+
+        for (int i = 0; i < numExamsTaken; i++) {
+            if (exams[i] < minScore) {
+                minScore = exams[i];
+            }
+            if (exams[i] > maxScore) {
+                maxScore = exams[i];
+            }
+        }
+
+        return maxScore - minScore;
+    }
+
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
+    public void addExamScore(int score) {
+        exams[numExamsTaken] = score;
+        numExamsTaken++;
+    }
+
+    public void setGPA(double theGPA) {
+        gpa = theGPA;
+    }
+
+    public String toString() {
+        return firstName + " " + lastName + " is in grade: " + gradeLevel;
+    }
+}
+
+//Second file
+import java.util.Random;
+
+public class Randomizer {
+
+    private static Random random = new Random();
+
+    public static boolean nextBoolean() {
+        return random.nextBoolean();
+    }
+
+    public static boolean nextBoolean(double probability) {
+        return random.nextDouble() < probability;
+    }
+
+    public static int nextInt() {
+        return random.nextInt();
+    }
+
+    public static int nextInt(int n) {
+        return random.nextInt(n);
+    }
+
+    public static int nextInt(int min, int max) {
+        return min + random.nextInt(max - min + 1);
+    }
+
+    public static double nextDouble() {
+        return random.nextDouble();
+    }
+
+    public static double nextDouble(double min, double max) {
+        return min + (max - min) * random.nextDouble();
+    }
+}
+
+//Third File
+public class ClassroomTester extends ConsoleProgram
+{
+    public void run()
+    {
+        Classroom c = new Classroom(2);
+        
+        Student ada = new Student("Ada", "Lovelace", 12);
+        ada.addExamScore(44);
+        ada.addExamScore(65);
+        ada.addExamScore(77);
+
+        Student alan = new Student("Alan", "Turing", 11);
+        alan.addExamScore(38);
+        alan.addExamScore(24);
+        alan.addExamScore(31);
+
+        // add students to classroom
+        c.addStudent(ada);
+        c.addStudent(alan);
+        c.printStudents();
+        
+        Student mostImproved = c.getMostImprovedStudent();
+        System.out.println("The most improved student is " + mostImproved.getName());
+    }
+}
+
+Fourth File:
+public class Classroom
+{
+    Student[] students;
+    int numStudentsAdded;
+    
+    public Classroom(int numStudents)
+    {
+        students = new Student[numStudents];
+        numStudentsAdded = 0;
+    }
+    
+    public Student getMostImprovedStudent() {
+  if (numStudentsAdded == 0) {
+        return null; // Return null if no students have been added
+    }
+
+    Student mostImproved = students[0];
+    int maxRange = mostImproved.getExamRange();
+
+    for (int i = 1; i < numStudentsAdded; i++) {
+        int range = students[i].getExamRange();
+        if (range > maxRange) {
+            maxRange = range;
+            mostImproved = students[i];
+        }
+    }
+
+    return mostImproved; // Return the most improved student
+}
+    
+    public void addStudent(Student s)
+    {
+        students[numStudentsAdded] = s;
+        numStudentsAdded++;
+    }
+    
+    public void printStudents()
+    {
+        for(int i = 0; i < numStudentsAdded; i++)
+        {
+            System.out.println(students[i]);
+        }
+    }
+}
