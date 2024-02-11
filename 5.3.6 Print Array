@@ -1,0 +1,16 @@
+public class PrintArray extends ConsoleProgram
+{
+    public void run()
+    {
+        String[] arr = new String[]{"a", "b", "c"};
+        printArr(arr);
+    }
+    
+    public void printArr(String[] arr)
+    {
+ for (String element : arr) {
+            // Print each element on its own line
+            System.out.println(element);
+            }
+}
+}
